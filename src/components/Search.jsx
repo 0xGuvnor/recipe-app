@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { useGlobalContext } from "../context";
 
 const Search = () => {
-  const { setSearchTerm } = useGlobalContext();
+  const { setSearchTerm, fetchRandomMeal } = useGlobalContext();
 
   const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text) {
-      setSearchTerm(text);
-      setText("");
-    }
+
+    if (text) setSearchTerm(text);
+  };
+
+  const handleRandomMeal = () => {
+    setSearchTerm("");
+    fetchRandomMeal();
   };
 
   return (
@@ -27,7 +30,11 @@ const Search = () => {
         <button type="submit" className="btn">
           Search
         </button>
-        <button type="button" className="btn btn-hipster">
+        <button
+          type="button"
+          className="btn btn-hipster"
+          onClick={handleRandomMeal}
+        >
           Surprise Me
         </button>
       </form>
