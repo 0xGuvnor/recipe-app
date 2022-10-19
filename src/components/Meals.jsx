@@ -1,9 +1,9 @@
 import React from "react";
 import { useGlobalContext } from "../context";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const Meals = () => {
-  const { meals, loading, selectMeal } = useGlobalContext();
+  const { meals, loading, selectMeal, addToFavourites } = useGlobalContext();
 
   return (
     <div>
@@ -26,8 +26,12 @@ const Meals = () => {
                 />
                 <footer>
                   <h5>{title}</h5>
-                  <button className="like-btn">
+                  <button
+                    className="like-btn"
+                    onClick={() => addToFavourites(idMeal)}
+                  >
                     <AiOutlineHeart />
+                    {/* <AiFillHeart /> */}
                   </button>
                 </footer>
               </article>

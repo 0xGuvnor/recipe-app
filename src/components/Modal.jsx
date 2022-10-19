@@ -17,7 +17,16 @@ const Modal = () => {
         <img src={image} alt={title} className="img modal-img" />
         <div className="modal-content">
           <h4>{title}</h4>
-          <p>Instructions</p>
+          <p>
+            <b>Ingredients</b>
+          </p>
+          <ul>
+            <li>Placeholder</li>
+            <li>Placeholder</li>
+          </ul>
+          <p>
+            <b>Instructions</b>
+          </p>
           <p>{text}</p>
           <a href={source} target="_blank" rel="noreferrer">
             Source
