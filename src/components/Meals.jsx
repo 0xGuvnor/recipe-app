@@ -3,7 +3,16 @@ import { useGlobalContext } from "../context";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const Meals = () => {
-  const { meals, loading, selectMeal, addToFavourites } = useGlobalContext();
+  const {
+    meals,
+    loading,
+    selectMeal,
+    favourites,
+    addToFavourites,
+    removeFromFavourites,
+  } = useGlobalContext();
+
+  const faveMeals = favourites.map((fave) => fave.idMeal);
 
   return (
     <div>
@@ -28,10 +37,17 @@ const Meals = () => {
                   <h5>{title}</h5>
                   <button
                     className="like-btn"
-                    onClick={() => addToFavourites(idMeal)}
+                    onClick={
+                      faveMeals.includes(idMeal)
+                        ? () => removeFromFavourites(idMeal)
+                        : () => addToFavourites(idMeal)
+                    }
                   >
-                    <AiOutlineHeart />
-                    {/* <AiFillHeart /> */}
+                    {faveMeals.includes(idMeal) ? (
+                      <AiFillHeart />
+                    ) : (
+                      <AiOutlineHeart />
+                    )}
                   </button>
                 </footer>
               </article>

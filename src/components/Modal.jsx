@@ -4,6 +4,31 @@ import { useGlobalContext } from "../context";
 const Modal = () => {
   const { selectedMeal, closeModal } = useGlobalContext();
 
+  let ingredientsList = [];
+  let tempObj = {};
+  for (const key in selectedMeal) {
+    if (key.includes("Ingredient") && selectedMeal[key].trim()) {
+      const ingredientCount = key.match(/\d+$/)[0];
+      const newKey = `item${ingredientCount}`;
+
+      tempObj[newKey] = {
+        ...tempObj[newKey],
+        ingredient: selectedMeal[key].trim(),
+      };
+    } else if (key.includes("Measure") && selectedMeal[key].trim()) {
+      const ingredientCount = key.match(/\d+$/)[0];
+      const newKey = `item${ingredientCount}`;
+
+      tempObj[newKey] = {
+        ...tempObj[newKey],
+        measurement: selectedMeal[key].trim(),
+      };
+    }
+  }
+  for (const key in tempObj) {
+    ingredientsList.push(tempObj[key]);
+  }
+
   const {
     strMealThumb: image,
     strMeal: title,
@@ -21,8 +46,11 @@ const Modal = () => {
             <b>Ingredients</b>
           </p>
           <ul>
-            <li>Placeholder</li>
-            <li>Placeholder</li>
+            {ingredientsList.map((meal) => (
+              <li>
+                {meal.ingredient} - {meal.measurement}
+              </li>
+            ))}
           </ul>
           <p>
             <b>Instructions</b>
